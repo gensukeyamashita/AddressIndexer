@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+$LOAD_PATH.unshift File.expand_path("../test", __dir__)
 require "test_helper"
 
 class TestAddressIndexer < Minitest::Test
@@ -8,6 +9,9 @@ class TestAddressIndexer < Minitest::Test
   end
 
   def test_it_does_something_useful
-    assert false
+    #AddressIndexer.loadCsvIntoListOfList
+    #AddressIndexer.printList
+    AddressIndexer.printListForUserInput('東京都')
+    #assert false
   end
 end

@@ -1,8 +1,74 @@
+# -*- encoding: utf-8 -*-
 # frozen_string_literal: true
-
 require_relative "AddressIndexer/version"
-
+require 'csv'
 module AddressIndexer
   class Error < StandardError; end
-  # Your code goes here...
+  @@list =[]
+  @@pairIndex ={'key'=>[1,2,3]}
+  def loadCsvIntoListOfListAndIndexCols
+    # CSV.foreachはフールパス必要なので、File.expand_pathを使用し,プロジェクトのルートパス取得する
+    csvAddressPath = File.expand_path('./resources/csv/in/KEN_ALL_UTF_8.csv')
+    csvAddressPath = File.expand_path('./resources/csv/in/test_UTF_8.csv')
+    recordNo=0   # レコード番号
+    # ダウンロードしたCSVがSJISになっています
+    # コンソルに出力する時に文字化けになっていたためファイルのエンコードがUTF-8に変更しました
+    # TODO SJIS希望であれば後で対応が必要
+    # Ruby提供するエンコードリスト:https://docs.ruby-lang.org/ja/latest/class/Encoding.html
+    CSV.foreach(csvAddressPath ,:headers=>false) do |str|
+      # レコードがリストに格納する
+      @@list[recordNo]=str
+
+      compareCols =[6,7,8]                      # 希望カラムを設定し
+      compareCols.each { |colNumber|      # 希望カラムにループ
+        stringLoop =0
+        while stringLoop!=str[colNumber].length-1 do
+          if @@pairIndex.has_key?(str[colNumber][stringLoop..stringLoop+1])
+            # 存在する場合は行番号の存在確認と追加
+            if(!@@pairIndex[str[colNumber][stringLoop..stringLoop+1]].include?recordNo)
+              @@pairIndex[str[colNumber][stringLoop..stringLoop+1]].push(recordNo)
+            end
+          else
+            # 存在しない場合キー追加と行番号追加
+            @@pairIndex[str[colNumber][stringLoop..stringLoop+1]]=[recordNo]
+          end
+          stringLoop=stringLoop+1
+        end
+      }
+
+      recordNo=recordNo+1
+    end
+  end
+  def printListForUserInput(userInput)
+    # CSVをロードし、カラム内容インデクスする
+    loadCsvIntoListOfListAndIndexCols
+    csvOutPath = File.expand_path('./resources/csv/out')+'/'+Time.new.strftime("%Y%m%d%H%M%S")+'.csv'
+    keyExistsFlag = false
+    lineNumberList = []
+    userInputCharLoop = 0
+    while userInputCharLoop!=userInput.length-1 do
+      # ユーザ入力した値がHashにあるかどうか確認
+      if @@pairIndex.has_key?userInput[userInputCharLoop..userInputCharLoop+1]
+        # キー存在する場合はキー存在フラグをtrueに設定
+        keyExistsFlag = true
+        # リスト結合し、同じ値をコピーしない
+        lineNumberList = lineNumberList | @@pairIndex[userInput[userInputCharLoop..userInputCharLoop+1]]
+      end
+      userInputCharLoop+=1
+    end
+    if keyExistsFlag == true
+      # lineNumberListの情報より@@listに格納した情報出力
+      puts lineNumberList.to_s
+      CSV.open(csvOutPath, "wb") do |csv|
+        lineNumberList.each { |lineNo|
+          puts @@list[lineNo].to_s
+          csv << @@list[lineNo]
+        }
+      end
+    else
+      puts '入力に対してレコードが見つかりませんでした'
+    end
+  end
+  module_function :printListForUserInput
+  module_function :loadCsvIntoListOfListAndIndexCols
 end
