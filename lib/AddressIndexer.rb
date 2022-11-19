@@ -40,6 +40,8 @@ module AddressIndexer
     end
   end
   def printListForUserInput(userInput)
+    # 要件定義よりスペースは文字として扱わない。WhiteSpace削除
+    userInput = userInput.gsub(/[[:space:]]/, '')
     # CSVをロードし、カラム内容インデクスする
     loadCsvIntoListOfListAndIndexCols
     csvOutPath = File.expand_path('./resources/csv/out')+'/'+Time.new.strftime("%Y%m%d%H%M%S")+'.csv'
