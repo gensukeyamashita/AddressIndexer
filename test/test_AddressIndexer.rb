@@ -1,3 +1,4 @@
+# -*- encoding: SHIFT_JIS -*-
 # frozen_string_literal: true
 
 $LOAD_PATH.unshift File.expand_path("../test", __dir__)
@@ -11,7 +12,7 @@ class TestAddressIndexer < Minitest::Test
   def test_it_does_something_useful
     #AddressIndexer.loadCsvIntoListOfList
     #AddressIndexer.printList
-    AddressIndexer.printListForUserInput('æ±äº¬éƒ½')
+    AddressIndexer.printListForUserInput('“Œ ‹ž “s')
     #assert false
   end
 end

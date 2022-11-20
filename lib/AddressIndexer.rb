@@ -1,35 +1,33 @@
-# -*- encoding: utf-8 -*-
+# -*- encoding: SHIFT_JIS -*-
 # frozen_string_literal: true
 require_relative "AddressIndexer/version"
 require 'csv'
 module AddressIndexer
   class Error < StandardError; end
   @@list =[]
-  @@pairIndex ={'key'=>[1,2,3]}
-  def loadCsvIntoListOfListAndIndexCols
-    # CSV.foreachã¯ãƒ•ãƒ¼ãƒ«ãƒ‘ã‚¹å¿…è¦ãªã®ã§ã€File.expand_pathã‚’ä½¿ç”¨ã—,ãƒ—ãƒ­ã‚¸ã‚§ã‚¯ãƒˆã®ãƒ«ãƒ¼ãƒˆãƒ‘ã‚¹å–å¾—ã™ã‚‹
-    csvAddressPath = File.expand_path('./resources/csv/in/KEN_ALL_UTF_8.csv')
-    csvAddressPath = File.expand_path('./resources/csv/in/test_UTF_8.csv')
-    recordNo=0   # ãƒ¬ã‚³ãƒ¼ãƒ‰ç•ªå·
-    # ãƒ€ã‚¦ãƒ³ãƒ­ãƒ¼ãƒ‰ã—ãŸCSVãŒSJISã«ãªã£ã¦ã„ã¾ã™
-    # ã‚³ãƒ³ã‚½ãƒ«ã«å‡ºåŠ›ã™ã‚‹æ™‚ã«æ–‡å­—åŒ–ã‘ã«ãªã£ã¦ã„ãŸãŸã‚ãƒ•ã‚¡ã‚¤ãƒ«ã®ã‚¨ãƒ³ã‚³ãƒ¼ãƒ‰ãŒUTF-8ã«å¤‰æ›´ã—ã¾ã—ãŸ
-    # TODO SJISå¸Œæœ›ã§ã‚ã‚Œã°å¾Œã§å¯¾å¿œãŒå¿…è¦
-    # Rubyæä¾›ã™ã‚‹ã‚¨ãƒ³ã‚³ãƒ¼ãƒ‰ãƒªã‚¹ãƒˆ:https://docs.ruby-lang.org/ja/latest/class/Encoding.html
-    CSV.foreach(csvAddressPath ,:headers=>false) do |str|
-      # ãƒ¬ã‚³ãƒ¼ãƒ‰ãŒãƒªã‚¹ãƒˆã«æ ¼ç´ã™ã‚‹
-      @@list[recordNo]=str
+  @@pairIndex ={}
 
-      compareCols =[6,7,8]                      # å¸Œæœ›ã‚«ãƒ©ãƒ ã‚’è¨­å®šã—
-      compareCols.each { |colNumber|      # å¸Œæœ›ã‚«ãƒ©ãƒ ã«ãƒ«ãƒ¼ãƒ—
+  def loadCsvIntoListOfListAndIndexCols
+    # CSV.foreach‚Íƒt[ƒ‹ƒpƒX•K—v‚È‚Ì‚ÅAFile.expand_path‚ğg—p‚µ,ƒvƒƒWƒFƒNƒg‚Ìƒ‹[ƒgƒpƒXæ“¾‚·‚é
+    csvAddressPath = File.expand_path('./resources/csv/in/KEN_ALL.csv')
+    csvAddressPath = File.expand_path('./resources/csv/in/test.csv')
+    csvIndexOutPath = File.expand_path('./resources/csv/out/csvIndex.csv')
+    recordNo=0   # ƒŒƒR[ƒh”Ô†
+    # Ruby’ñ‹Ÿ‚·‚éƒGƒ“ƒR[ƒhƒŠƒXƒg:https://docs.ruby-lang.org/ja/latest/class/Encoding.html
+    CSV.foreach(csvAddressPath ,:encoding=>'shift_jis', :headers=>false) do |str|
+      # ƒŒƒR[ƒh‚ªƒŠƒXƒg‚ÉŠi”[‚·‚é
+      @@list[recordNo]=str
+      compareCols =[6,7,8]                      # Šó–]ƒJƒ‰ƒ€‚ğİ’è
+      compareCols.each { |colNumber|      # Šó–]ƒJƒ‰ƒ€‚Éƒ‹[ƒv
         stringLoop =0
         while stringLoop!=str[colNumber].length-1 do
           if @@pairIndex.has_key?(str[colNumber][stringLoop..stringLoop+1])
-            # å­˜åœ¨ã™ã‚‹å ´åˆã¯è¡Œç•ªå·ã®å­˜åœ¨ç¢ºèªã¨è¿½åŠ 
+            # ‘¶İ‚·‚éê‡‚Ís”Ô†‚Ì‘¶İŠm”F‚Æ’Ç‰Á
             if(!@@pairIndex[str[colNumber][stringLoop..stringLoop+1]].include?recordNo)
               @@pairIndex[str[colNumber][stringLoop..stringLoop+1]].push(recordNo)
             end
           else
-            # å­˜åœ¨ã—ãªã„å ´åˆã‚­ãƒ¼è¿½åŠ ã¨è¡Œç•ªå·è¿½åŠ 
+            # ‘¶İ‚µ‚È‚¢ê‡ƒL[’Ç‰Á‚Æs”Ô†’Ç‰Á
             @@pairIndex[str[colNumber][stringLoop..stringLoop+1]]=[recordNo]
           end
           stringLoop=stringLoop+1
@@ -40,27 +38,29 @@ module AddressIndexer
     end
   end
   def printListForUserInput(userInput)
-    # è¦ä»¶å®šç¾©ã‚ˆã‚Šã‚¹ãƒšãƒ¼ã‚¹ã¯æ–‡å­—ã¨ã—ã¦æ‰±ã‚ãªã„ã€‚WhiteSpaceå‰Šé™¤
+    # —vŒ’è‹`‚æ‚èƒXƒy[ƒX‚Í•¶š‚Æ‚µ‚Äˆµ‚í‚È‚¢BWhiteSpaceíœ
+    userInput = userInput.encode('shift_jis')
+
     userInput = userInput.gsub(/[[:space:]]/, '')
-    # CSVã‚’ãƒ­ãƒ¼ãƒ‰ã—ã€ã‚«ãƒ©ãƒ å†…å®¹ã‚¤ãƒ³ãƒ‡ã‚¯ã‚¹ã™ã‚‹
+    # CSV‚ğƒ[ƒh‚µAƒJƒ‰ƒ€“à—eƒCƒ“ƒfƒNƒX‚·‚é
     loadCsvIntoListOfListAndIndexCols
     csvOutPath = File.expand_path('./resources/csv/out')+'/'+Time.new.strftime("%Y%m%d%H%M%S")+'.csv'
     keyExistsFlag = false
     lineNumberList = []
     userInputCharLoop = 0
+
     while userInputCharLoop!=userInput.length-1 do
-      # ãƒ¦ãƒ¼ã‚¶å…¥åŠ›ã—ãŸå€¤ãŒHashã«ã‚ã‚‹ã‹ã©ã†ã‹ç¢ºèª
+      # ƒ†[ƒU“ü—Í‚µ‚½’l‚ªHash‚É‚ ‚é‚©‚Ç‚¤‚©Šm”F
       if @@pairIndex.has_key?userInput[userInputCharLoop..userInputCharLoop+1]
-        # ã‚­ãƒ¼å­˜åœ¨ã™ã‚‹å ´åˆã¯ã‚­ãƒ¼å­˜åœ¨ãƒ•ãƒ©ã‚°ã‚’trueã«è¨­å®š
+        # ƒL[‘¶İ‚·‚éê‡‚ÍƒL[‘¶İƒtƒ‰ƒO‚ğtrue‚Éİ’è
         keyExistsFlag = true
-        # ãƒªã‚¹ãƒˆçµåˆã—ã€åŒã˜å€¤ã‚’ã‚³ãƒ”ãƒ¼ã—ãªã„
+        # ƒŠƒXƒgŒ‹‡‚µA“¯‚¶’l‚ğƒRƒs[‚µ‚È‚¢
         lineNumberList = lineNumberList | @@pairIndex[userInput[userInputCharLoop..userInputCharLoop+1]]
       end
       userInputCharLoop+=1
     end
     if keyExistsFlag == true
-      # lineNumberListã®æƒ…å ±ã‚ˆã‚Š@@listã«æ ¼ç´ã—ãŸæƒ…å ±å‡ºåŠ›
-      puts lineNumberList.to_s
+      # lineNumberList‚Ìî•ñ‚æ‚è@@list‚ÉŠi”[‚µ‚½î•ño—Í
       CSV.open(csvOutPath, "wb") do |csv|
         lineNumberList.each { |lineNo|
           puts @@list[lineNo].to_s
@@ -68,7 +68,7 @@ module AddressIndexer
         }
       end
     else
-      puts 'å…¥åŠ›ã«å¯¾ã—ã¦ãƒ¬ã‚³ãƒ¼ãƒ‰ãŒè¦‹ã¤ã‹ã‚Šã¾ã›ã‚“ã§ã—ãŸ'
+      puts '“ü—Í‚É‘Î‚µ‚ÄƒŒƒR[ƒh‚ªŒ©‚Â‚©‚è‚Ü‚¹‚ñ‚Å‚µ‚½'
     end
   end
   module_function :printListForUserInput
