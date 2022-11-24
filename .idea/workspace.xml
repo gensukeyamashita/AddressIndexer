@@ -1,17 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="a49a947a-08db-43a9-b4a3-daf9749ab8ca" name="Changes" comment="検索出力まで完了">
-      <change afterPath="$PROJECT_DIR$/resources/csv/out/東京都20221124143139.csv" afterDir="false" />
+    <list default="true" id="a49a947a-08db-43a9-b4a3-daf9749ab8ca" name="Changes" comment="課題ごとに関数をまとめ">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/AddressIndexer.rb" beforeDir="false" afterPath="$PROJECT_DIR$/lib/AddressIndexer.rb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/csv/in/KEN_ALL_UTF_8.CSV" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/csv/in/KEN_JOINED.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/csv/in/csvIndexFile.csv" beforeDir="false" afterPath="$PROJECT_DIR$/resources/csv/in/csvIndexFile.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/csv/in/ngramIndex.csv" beforeDir="false" afterPath="$PROJECT_DIR$/resources/csv/in/ngramIndex.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/csv/in/test_UTF_8.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/csv/out/20221119211851.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/test_AddressIndexer.rb" beforeDir="false" afterPath="$PROJECT_DIR$/test/test_AddressIndexer.rb" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -62,6 +53,13 @@
       <recent name="D:\Github\AddressIndexer\resources\csv\in" />
     </key>
   </component>
+  <component name="RubyModuleManagerSettings">
+    <option name="blackListedRootsPaths">
+      <list>
+        <option value="$PROJECT_DIR$" />
+      </list>
+    </option>
+  </component>
   <component name="RunManager" selected="Test::Unit/Shoulda/Minitest.test_kadai02">
     <configuration name="test_kadai01" type="TestUnitRunConfigurationType" factoryName="Test::Unit/Shoulda/Minitest" temporary="true" nameIsGenerated="true">
       <module name="AddressIndexer" />
@@ -76,7 +74,7 @@
       </envs>
       <EXTENSION ID="BundlerRunConfigurationExtension" BUNDLE_MODE="AUTO" bundleExecEnabled="true" />
       <EXTENSION ID="JRubyRunConfigurationExtension" NailgunExecEnabled="false" />
-      <EXTENSION ID="RubyCoverageRunConfigurationExtension" track_test_folders="true" runner="rcov" ENABLE_BRANCH_COVERAGE="true" ENABLE_FORKED_COVERAGE="true" />
+      <EXTENSION ID="RubyCoverageRunConfigurationExtension" runner="rcov" />
       <EXTENSION ID="org.jetbrains.plugins.ruby.rails.run.RailsRunConfigurationExtension" SCRATCH_USE_RAILS_RUNNER="false" />
       <RTEST_RUN_CONFIG_SETTINGS_ID NAME="TESTS_FOLDER_PATH" VALUE="" />
       <RTEST_RUN_CONFIG_SETTINGS_ID NAME="TEST_SCRIPT_PATH" VALUE="$PROJECT_DIR$/test/test_AddressIndexer.rb" />
@@ -105,7 +103,7 @@
       </envs>
       <EXTENSION ID="BundlerRunConfigurationExtension" BUNDLE_MODE="AUTO" bundleExecEnabled="true" />
       <EXTENSION ID="JRubyRunConfigurationExtension" NailgunExecEnabled="false" />
-      <EXTENSION ID="RubyCoverageRunConfigurationExtension" track_test_folders="true" runner="rcov" ENABLE_BRANCH_COVERAGE="true" ENABLE_FORKED_COVERAGE="true" />
+      <EXTENSION ID="RubyCoverageRunConfigurationExtension" runner="rcov" />
       <EXTENSION ID="org.jetbrains.plugins.ruby.rails.run.RailsRunConfigurationExtension" SCRATCH_USE_RAILS_RUNNER="false" />
       <RTEST_RUN_CONFIG_SETTINGS_ID NAME="TESTS_FOLDER_PATH" VALUE="" />
       <RTEST_RUN_CONFIG_SETTINGS_ID NAME="TEST_SCRIPT_PATH" VALUE="$PROJECT_DIR$/test/test_AddressIndexer.rb" />
@@ -134,7 +132,7 @@
       </envs>
       <EXTENSION ID="BundlerRunConfigurationExtension" BUNDLE_MODE="AUTO" bundleExecEnabled="true" />
       <EXTENSION ID="JRubyRunConfigurationExtension" NailgunExecEnabled="false" />
-      <EXTENSION ID="RubyCoverageRunConfigurationExtension" track_test_folders="true" runner="rcov" ENABLE_BRANCH_COVERAGE="true" ENABLE_FORKED_COVERAGE="true" />
+      <EXTENSION ID="RubyCoverageRunConfigurationExtension" runner="rcov" />
       <EXTENSION ID="org.jetbrains.plugins.ruby.rails.run.RailsRunConfigurationExtension" SCRATCH_USE_RAILS_RUNNER="false" />
       <RTEST_RUN_CONFIG_SETTINGS_ID NAME="TESTS_FOLDER_PATH" VALUE="" />
       <RTEST_RUN_CONFIG_SETTINGS_ID NAME="TEST_SCRIPT_PATH" VALUE="$PROJECT_DIR$/test/test_AddressIndexer.rb" />
@@ -163,7 +161,7 @@
       </envs>
       <EXTENSION ID="BundlerRunConfigurationExtension" BUNDLE_MODE="AUTO" bundleExecEnabled="true" />
       <EXTENSION ID="JRubyRunConfigurationExtension" NailgunExecEnabled="false" />
-      <EXTENSION ID="RubyCoverageRunConfigurationExtension" track_test_folders="true" runner="rcov" ENABLE_BRANCH_COVERAGE="true" ENABLE_FORKED_COVERAGE="true" />
+      <EXTENSION ID="RubyCoverageRunConfigurationExtension" runner="rcov" />
       <EXTENSION ID="org.jetbrains.plugins.ruby.rails.run.RailsRunConfigurationExtension" SCRATCH_USE_RAILS_RUNNER="false" />
       <RTEST_RUN_CONFIG_SETTINGS_ID NAME="TESTS_FOLDER_PATH" VALUE="" />
       <RTEST_RUN_CONFIG_SETTINGS_ID NAME="TEST_SCRIPT_PATH" VALUE="$PROJECT_DIR$/test/test_AddressIndexer.rb" />
@@ -192,7 +190,7 @@
       </envs>
       <EXTENSION ID="BundlerRunConfigurationExtension" BUNDLE_MODE="AUTO" bundleExecEnabled="true" />
       <EXTENSION ID="JRubyRunConfigurationExtension" NailgunExecEnabled="false" />
-      <EXTENSION ID="RubyCoverageRunConfigurationExtension" track_test_folders="true" runner="rcov" ENABLE_BRANCH_COVERAGE="true" ENABLE_FORKED_COVERAGE="true" />
+      <EXTENSION ID="RubyCoverageRunConfigurationExtension" runner="rcov" />
       <EXTENSION ID="org.jetbrains.plugins.ruby.rails.run.RailsRunConfigurationExtension" SCRATCH_USE_RAILS_RUNNER="false" />
       <RTEST_RUN_CONFIG_SETTINGS_ID NAME="TESTS_FOLDER_PATH" VALUE="" />
       <RTEST_RUN_CONFIG_SETTINGS_ID NAME="TEST_SCRIPT_PATH" VALUE="$PROJECT_DIR$/test/test_AddressIndexer.rb" />
@@ -336,8 +334,8 @@
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/AddressIndexer@testIndexCsvFile.rcov" NAME="testIndexCsvFile Coverage Results" MODIFIED="1669158929295" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="rcov" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" MODULE_NAME="AddressIndexer" />
     <SUITE FILE_PATH="coverage/AddressIndexer@test_step1.rcov" NAME="test_step1 Coverage Results" MODIFIED="1669199505412" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="rcov" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" MODULE_NAME="AddressIndexer" />
-    <SUITE FILE_PATH="coverage/AddressIndexer@test_kadai02.rcov" NAME="test_kadai02 Coverage Results" MODIFIED="1669269902516" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="rcov" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" MODULE_NAME="AddressIndexer" />
-    <SUITE FILE_PATH="coverage/AddressIndexer@test_kadai01.rcov" NAME="test_kadai01 Coverage Results" MODIFIED="1669269990167" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="rcov" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" MODULE_NAME="AddressIndexer" />
+    <SUITE FILE_PATH="coverage/AddressIndexer@test_kadai01.rcov" NAME="test_kadai01 Coverage Results" MODIFIED="1669270026258" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="rcov" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" MODULE_NAME="AddressIndexer" />
+    <SUITE FILE_PATH="coverage/AddressIndexer@test_kadai02.rcov" NAME="test_kadai02 Coverage Results" MODIFIED="1669270041323" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="rcov" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" MODULE_NAME="AddressIndexer" />
     <SUITE FILE_PATH="coverage/AddressIndexer@test_it_does_something_useful.rcov" NAME="test_it_does_something_useful Coverage Results" MODIFIED="1669181318016" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="rcov" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" MODULE_NAME="AddressIndexer" />
     <SUITE FILE_PATH="coverage/AddressIndexer@test_index_csv_file.rcov" NAME="test_index_csv_file Coverage Results" MODIFIED="1669171521269" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="rcov" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" MODULE_NAME="AddressIndexer" />
     <SUITE FILE_PATH="coverage/AddressIndexer@test_step2.rcov" NAME="test_step2 Coverage Results" MODIFIED="1669202294726" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="rcov" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" MODULE_NAME="AddressIndexer" />
