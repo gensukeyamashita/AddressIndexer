@@ -10,6 +10,30 @@ module AddressIndexer
   @@csvInPath = File.expand_path('./resources/csv/in')
   @@joinedRecordsCsvName = '/KEN_JOINED.csv'
   @@LFbytesize = 1
+
+  # 課題０１CSVのインデクスファイル作成
+  def kadai01_create_index_files(file_name)
+    if File.exist? @@csvInPath + file_name
+      # 複数行にある同じレコードを結合
+      AddressIndexer.join_same_records file_name
+      # 新しい作成したCSVをインデックスする
+      AddressIndexer.index_csv_file '/KEN_JOINED.csv'
+      # 新しく作成したCSVngramインデクス作成
+      AddressIndexer.create_ngram_index_file '/KEN_JOINED.csv'
+    else
+      puts 'File not found'
+    end
+  end
+
+  # 課題０２ユーザ入力検索し、出力
+  def kadai02_search_and_output_result(user_input)
+    if File.exist? @@csvInPath + '/KEN_JOINED.csv'
+      AddressIndexer.search_using_ngram_and_index_files(user_input,'/KEN_JOINED.csv')
+    else
+      puts 'File not found. Run kadai01 first in order to generate indexed files.'
+    end
+  end
+
   # 複数行に同じ住所が別れっているレコードの結合
   def join_same_records(file_name)
     compare_address = ''
@@ -163,8 +187,11 @@ module AddressIndexer
     end
   end
 
+  module_function :kadai01_create_index_files
+  module_function :kadai02_search_and_output_result
   module_function :join_same_records
   module_function :index_csv_file
   module_function :create_ngram_index_file
   module_function :search_using_ngram_and_index_files
+
 end
